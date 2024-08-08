@@ -15,10 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+import os
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path, re_path
+from django.views.static import serve
+
+# Up two folders to serve "site" content
+# For eg if current file path is "/Users/dharma/projects/django-projects/mysite/mysite/urls.py"
+# BASE_DIR will be "/Users/dharma/projects/django-projects/mysite"
+# SITE_ROOT will be "/Users/dharma/projects/django-projects/mysite/site"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SITE_ROOT = os.path.join(BASE_DIR, "site")
 
 urlpatterns = [
-    path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
+    path("polls/", include("polls.urls")),
+    re_path(
+        r"^site/(?P<path>.*)$",
+        serve,
+        {"document_root": SITE_ROOT, "show_indexes": True},
+        name="site_path",
+    ),
 ]
