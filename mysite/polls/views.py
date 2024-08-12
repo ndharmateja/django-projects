@@ -18,10 +18,10 @@ def detail(request: HttpResponse, question_id: int):
     return render(request, "polls/detail.html", ctx)
 
 
-def results(_: HttpResponse, question_id):
+def results(request: HttpResponse, question_id):
     q = get_object_or_404(Question, question_id)
     ctx = {"question": q}
-    return render(_, "polls/results.html", ctx)
+    return render(request, "polls/results.html", ctx)
 
 
 def vote(request: HttpResponse, question_id):
