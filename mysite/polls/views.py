@@ -20,7 +20,7 @@ def detail(request: HttpRequest, question_id: int):
 
 def results(request: HttpRequest, question_id):
     q = get_object_or_404(Question, pk=question_id)
-    print(q.choice_set.all())
+
     ctx = {"question": q}
     return render(request, "polls/results.html", ctx)
 
