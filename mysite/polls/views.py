@@ -11,20 +11,20 @@ def index(request: HttpRequest):
     return render(request, "polls/index.html", ctx)
 
 
-def detail(request: HttpResponse, question_id: int):
+def detail(request: HttpRequest, question_id: int):
     q = get_object_or_404(Question, pk=question_id)
 
     ctx = {"question": q}
     return render(request, "polls/detail.html", ctx)
 
 
-def results(request: HttpResponse, question_id):
+def results(request: HttpRequest, question_id):
     q = get_object_or_404(Question, question_id)
     ctx = {"question": q}
     return render(request, "polls/results.html", ctx)
 
 
-def vote(request: HttpResponse, question_id):
+def vote(request: HttpRequest, question_id):
     question = get_object_or_404(Question, pk=question_id)
 
     # Get the selected choice
@@ -43,5 +43,5 @@ def vote(request: HttpResponse, question_id):
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
 
-def owner(_: HttpResponse):
+def owner(_: HttpRequest):
     return HttpResponse("Hello, world. 7ca7066d is the polls index.")
