@@ -25,14 +25,14 @@ def results(_: HttpResponse, question_id):
 
 
 def vote(request: HttpResponse, question_id):
-    q = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=question_id)
 
     # Get the selected choice
     try:
-        selected_choice: Choice = q.choice_set.get(pk=request.POST["choice"])
+        selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
         # If error, rerender the question voting form
-        ctx = {"question": q, "error_message": "You didn't select a choice"}
+        ctx = {"question": question, "error_message": "You didn't select a choice"}
         return render(request, "polls/detail.html", ctx)
     else:
         # Increment the selected choice
@@ -40,7 +40,7 @@ def vote(request: HttpResponse, question_id):
         selected_choice.save()
 
         # Return redirect to avoid form being posted twice
-        return HttpResponseRedirect(reverse("polls:results", args=(q.id)))
+        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
 
 def owner(_: HttpResponse):
