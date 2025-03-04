@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 
@@ -26,3 +26,9 @@ def results(request, question_id):
 
 def vote(request, question_id):
     return HttpResponse(f"You're voting on question {question_id}")
+
+
+def owner(request: HttpRequest) -> HttpResponse:
+    response = HttpResponse()
+    response.write("Hello, world. 623d5ca4 is the polls index.")
+    return response
