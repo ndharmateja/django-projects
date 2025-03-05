@@ -6,14 +6,6 @@ from django.views.generic import DetailView, ListView
 
 from .models import Choice, Question
 
-# Create your views here.
-# def index(request):
-#     latest_question_list = Question.objects.order_by("-pub_date")[:5]
-
-#     template = loader.get_template("polls/index.html")
-#     ctx = {"latest_question_list": latest_question_list}
-#     return HttpResponse(template.render(ctx, request))
-
 
 class QuestionListView(ListView):
     model = Question
