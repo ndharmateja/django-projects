@@ -12,7 +12,7 @@
         {% for choice in question.choice_set.all %}
             <div>
                 <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }} ({{ choice.votes }} votes)</label>
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
             </div>
         {% endfor %}
     </fieldset>
