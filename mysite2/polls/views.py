@@ -24,12 +24,12 @@ class QuestionListView(ListView):
 
 class QuestionDetailView(DetailView):
     model = Question
+    template_name = "polls/detail.html"
 
 
-def results(request, question_id):
-    question: Question = get_object_or_404(Question, pk=question_id)
-    ctx = {"question": question}
-    return render(request, "polls/results.html", ctx)
+class QuestionResultsView(DetailView):
+    model = Question
+    template_name = "polls/results.html"
 
 
 def vote(request: HttpRequest, question_id) -> HttpResponse:
