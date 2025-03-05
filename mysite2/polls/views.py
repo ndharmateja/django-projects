@@ -9,6 +9,7 @@ from .models import Choice, Question
 
 class QuestionListView(ListView):
     model = Question
+    template_name = "polls/index.html"
 
     def get_queryset(self):
         return Question.objects.order_by("-pub_date")[:5]
