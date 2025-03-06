@@ -31,6 +31,7 @@ SITE_ROOT = os.path.join(BASE_DIR, "site")
 urlpatterns = [
     path("", TemplateView.as_view(template_name="home/main.html")),
     path("polls/", include("polls.urls")),
+    path("hello/", include("hello.urls")),
     path("admin/", admin.site.urls),
     re_path(
         r"^site/(?P<path>.*)$",
