@@ -7,6 +7,6 @@ def myview(request: HttpRequest) -> HttpResponse:
     request.session["num_visits"] = num_visits
     if num_visits > 4:
         del request.session["num_visits"]
-    resp = HttpResponse(f"View count: {num_visits}")
+    resp = HttpResponse(f"view count={num_visits}")
     resp.set_cookie("dj4e_cookie", "eea1c0b5", max_age=1000)
     return resp
